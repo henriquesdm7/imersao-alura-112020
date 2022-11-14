@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledTimeline = styled.div`
+export const StyledTimeline = styled.div `
   flex: 1;
   width: 100%;
   padding: 16px;
@@ -22,7 +22,7 @@ export const StyledTimeline = styled.div`
     width: 100%;
     padding: 0;
     overflow: hidden;
-    padding: 16px;
+    /* padding: 16px; */
     div {
       
       width: calc(100vw - 16px * 4);
