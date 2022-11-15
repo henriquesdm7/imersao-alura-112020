@@ -12,7 +12,6 @@ const HomePage = () => {
 
     return (
         <>
-            <CSSReset />
             <div style={{
                 display: "flex",
                 flexDirection: "column",
@@ -31,6 +30,8 @@ const HomePage = () => {
 }
 
 const StyledHeader = styled.div`
+    background-color: ${({theme}) => theme.backgroundLevel1};
+
     .banner-image {
         background-image: url(${({ bannerSrc }) => bannerSrc});
         background-size: cover;
