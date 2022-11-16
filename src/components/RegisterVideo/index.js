@@ -18,11 +18,12 @@ const checkThumb = ({ url }) => {
     const thumbRegex = /https:\/\/www\.youtube\.com\/watch\?v=([^&]+)/;
     const videoId = thumbRegex.exec(url);
 
-    if (videoId && videoId.length > 1){
+    if (videoId && videoId.length > 1) {
         return videoId[1]
     }
     return false;
 }
+
 
 const RegisterVideo = () => {
     const [formVisible, setFormVisible] = useState(false)
@@ -30,6 +31,11 @@ const RegisterVideo = () => {
         initialValues: { title: '', url: '' }
     });
     const [thumbnail, setThumbnail] = useState(false);
+
+    const handleChangeUrl = (e) => {
+        formRegister.handleChange(e);
+        setThumbnail(checkThumb({ url: e.target.value }));
+    }
 
     return (
         <StyledRegisterVideo>
@@ -43,15 +49,18 @@ const RegisterVideo = () => {
             {formVisible && (
                 <form onSubmit={(e) => {
                     e.preventDefault()
-                    setThumbnail(checkThumb({url: formRegister.values.url}))
-                    // formRegister.clearForm()
-                    // setFormVisible(false)
+                    formRegister.clearForm()
+                    setThumbnail(false)
+                    setFormVisible(false)
                 }}>
                     <div>
                         <button
                             type='button'
                             className='close-modal'
-                            onClick={() => setFormVisible(false)}
+                            onClick={() => {
+                                setFormVisible(false)
+                                setThumbnail(false)
+                            }}
                         >
                             X
                         </button>
@@ -67,7 +76,7 @@ const RegisterVideo = () => {
                             placeholder='URL do vídeo'
                             name='url'
                             value={formRegister.values.url}
-                            onChange={formRegister.handleChange}
+                            onChange={handleChangeUrl}
                         />
                         {thumbnail && (
                             <img
